@@ -6,14 +6,15 @@ INSERT INTO uzytkownik (login, email) VALUES
 ('daria', 'daria@example.com');
 
 INSERT INTO follower (user_id, follows_user_id) VALUES
+(0, 1),
+(0, 2),
 (1, 2),
-(1, 3),
-(2, 3),
-(3, 4);
+(2, 3);
+
 
 INSERT INTO wpis (user_id, tresc) VALUES
-(1, 'Pierwszy wpis Adama'),
-(2, 'Bartek testuje system'),
-(3, 'Celina wrzuca aktualizację'),
-(1, 'Adam dodaje kolejny wpis'),
-(4, 'Daria dołącza do platformy');
+(0, 'Pierwszy wpis Adama'),
+(1, 'Bartek testuje system'),
+(2, 'Celina wrzuca aktualizację'),
+(0, 'Adam dodaje kolejny wpis'),
+(3, 'Daria dołącza do platformy');
