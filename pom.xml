@@ -7,11 +7,12 @@
   <groupId>pl.atins</groupId>
   <artifactId>micro-b</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
 
   <name>micro-b</name>
   <description>blog</description>
 
-  <properties>
+  <properties>	
     <!-- Java -->
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -123,6 +124,14 @@
       <artifactId>commons-beanutils</artifactId>
       <version>${beanutils.version}</version>
     </dependency>
+    
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+       <version>3.1.0</version>
+      <scope>provided</scope>
+     </dependency>
+
 
   </dependencies>
 
