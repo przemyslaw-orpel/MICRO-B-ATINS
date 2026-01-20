@@ -12,15 +12,19 @@
   <description>blog</description>
 
   <properties>
-    <!-- Java 8 -->
+    <!-- Java -->
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+    <!-- Versions -->
     <spark.version>2.7.2</spark.version>
     <spark.freemarker.version>2.7.1</spark.freemarker.version>
     <freemarker.version>2.3.28</freemarker.version>
+
     <spring.version>4.3.8.RELEASE</spring.version>
+    <hibernate.version>5.2.10.Final</hibernate.version>
+
     <hsqldb.version>2.4.1</hsqldb.version>
     <dbcp2.version>2.1.1</dbcp2.version>
     <jbcrypt.version>0.4</jbcrypt.version>
@@ -28,6 +32,7 @@
   </properties>
 
   <dependencies>
+
     <!-- Spark -->
     <dependency>
       <groupId>com.sparkjava</groupId>
@@ -49,11 +54,46 @@
       <version>${freemarker.version}</version>
     </dependency>
 
-    <!-- Spring -->
+    <!-- Spring Core -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
       <version>${spring.version}</version>
+    </dependency>
+
+    <!-- Spring ORM -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!-- Spring WebMVC -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!-- Hibernate Core -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+
+    <!-- Hibernate EntityManager -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+
+    <!-- JPA API -->
+    <dependency>
+      <groupId>javax.persistence</groupId>
+      <artifactId>javax.persistence-api</artifactId>
+      <version>2.2</version>
     </dependency>
 
     <!-- HSQLDB -->
@@ -83,10 +123,12 @@
       <artifactId>commons-beanutils</artifactId>
       <version>${beanutils.version}</version>
     </dependency>
+
   </dependencies>
 
   <build>
     <plugins>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -106,6 +148,7 @@
           <mainClass>pl.atins.App</mainClass>
         </configuration>
       </plugin>
+
     </plugins>
   </build>
 
