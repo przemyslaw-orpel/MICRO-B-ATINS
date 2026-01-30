@@ -12,4 +12,5 @@ public class TestController {
     public String test() {
         return "Spring MVC dziala";
     }
+    
 }
