@@ -131,7 +131,22 @@
        <version>3.1.0</version>
       <scope>provided</scope>
      </dependency>
+	
+<!-- Testy: JUnit 4 -->
+<dependency>
+  <groupId>junit</groupId>
+  <artifactId>junit</artifactId>
+  <version>4.13.2</version>
+  <scope>test</scope>
+</dependency>
 
+<!-- Testy: integracja Spring + JUnit -->
+<dependency>
+  <groupId>org.springframework</groupId>
+  <artifactId>spring-test</artifactId>
+  <version>${spring.version}</version>
+  <scope>test</scope>
+</dependency>
 
   </dependencies>
 
