@@ -131,8 +131,34 @@
        <version>3.1.0</version>
       <scope>provided</scope>
      </dependency>
+	
+<!-- Testy: JUnit 4 -->
+<dependency>
+  <groupId>junit</groupId>
+  <artifactId>junit</artifactId>
+  <version>4.13.2</version>
+  <scope>test</scope>
+</dependency>
 
+<!-- Testy: integracja Spring + JUnit -->
+<dependency>
+  <groupId>org.springframework</groupId>
+  <artifactId>spring-test</artifactId>
+  <version>${spring.version}</version>
+  <scope>test</scope>
+</dependency>
+<!-- JAXB for Java 9+ -->
+<dependency>
+    <groupId>javax.xml.bind</groupId>
+    <artifactId>jaxb-api</artifactId>
+    <version>2.3.1</version>
+</dependency>
 
+<dependency>
+    <groupId>org.glassfish.jaxb</groupId>
+    <artifactId>jaxb-runtime</artifactId>
+    <version>2.3.1</version>
+</dependency>
   </dependencies>
 
   <build>
