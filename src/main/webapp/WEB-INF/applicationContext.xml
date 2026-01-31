@@ -64,4 +64,6 @@
   <bean class="pl.atins.dao.impl.FollowerDaoImpl"/>
   <bean class="pl.atins.dao.impl.WpisDaoImpl"/>
   
+  <bean class="pl.atins.service.impl.MicroblogServiceImpl"/>
+
 </beans>
