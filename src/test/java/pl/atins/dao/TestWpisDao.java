@@ -32,12 +32,17 @@ public class TestWpisDao {
     @Autowired
     private UzytkownikDao uzytkownikDao;
 
+    @Autowired
+    private FollowerDao followerDao;
+
     private Uzytkownik user;
+    private Uzytkownik otherUser;
 
     @Before
     public void setUp() {
         assertNotNull(wpisDao);
         assertNotNull(uzytkownikDao);
+        assertNotNull(followerDao);
 
         user = new Uzytkownik();
         user.setLogin("timeline_user");
@@ -45,6 +50,14 @@ public class TestWpisDao {
         user.setCreatedAt(LocalDateTime.now());
         uzytkownikDao.save(user);
 
+        // drugi użytkownik (followowany)
+        otherUser = new Uzytkownik();
+        otherUser.setLogin("followed_user");
+        otherUser.setEmail("followed_user@test.pl");
+        otherUser.setCreatedAt(LocalDateTime.now());
+        uzytkownikDao.save(otherUser);
+
+        // wpisy usera
         Wpis w1 = new Wpis();
         w1.setUserId(user.getId());
         w1.setTresc("Pierwszy wpis");
@@ -56,6 +69,16 @@ public class TestWpisDao {
         w2.setTresc("Drugi wpis");
         w2.setCreatedAt(LocalDateTime.now());
         wpisDao.save(w2);
+
+        // wpis followowanego usera
+        Wpis otherPost = new Wpis();
+        otherPost.setUserId(otherUser.getId());
+        otherPost.setTresc("Wpis followowanego użytkownika");
+        otherPost.setCreatedAt(LocalDateTime.now().minusMinutes(1));
+        wpisDao.save(otherPost);
+
+        // follow: user obserwuje otherUser
+        followerDao.follow(user.getId(), otherUser.getId());
     }
 
     @Test
@@ -63,7 +86,6 @@ public class TestWpisDao {
         List<Wpis> timeline = wpisDao.getUserTimeline(user.getId());
 
         assertNotNull(timeline);
-        // minimalna asercja, bez zgadywania sortowania
         assertEquals("Timeline użytkownika powinien mieć 2 wpisy", 2, timeline.size());
     }
 
@@ -79,5 +101,23 @@ public class TestWpisDao {
 
         assertTrue("Public timeline powinien zawierać 'Pierwszy wpis'", tresci.contains("Pierwszy wpis"));
         assertTrue("Public timeline powinien zawierać 'Drugi wpis'", tresci.contains("Drugi wpis"));
+    }
+
+    @Test
+    public void testGetFullTimeline_shouldContainOwnAndFollowedPosts() {
+        List<Wpis> fullTimeline = wpisDao.getFullTimeline(user.getId());
+
+        assertNotNull(fullTimeline);
+
+        List<String> tresci = fullTimeline.stream()
+                .map(Wpis::getTresc)
+                .collect(Collectors.toList());
+
+        assertTrue(tresci.contains("Pierwszy wpis"));
+        assertTrue(tresci.contains("Drugi wpis"));
+        assertTrue(
+                "Full timeline powinien zawierać wpis followowanego użytkownika",
+                tresci.contains("Wpis followowanego użytkownika")
+        );
     }
 }
